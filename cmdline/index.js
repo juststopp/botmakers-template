@@ -12,20 +12,16 @@ let config = {}
   readline.question(`Comment voulez vous appeler vôtre bot ?\n`, (input) => {
     config.name = input;
     
-  readline.question(`Vuel est le token de vôtre bot ? (Obtennable sur https://discord.com/developers/applications/me\n`, (input) => {
+  readline.question(`Quel est le token de vôtre bot ? (Obtennable sur https://discord.com/developers/applications/me\n`, (input) => {
     config.token = input;
-    
-  readline.question(`Que voulez vous comme couleur principale ? (En Color HEX, blanc: #FFFFFF etc...)\n`, (input) => {
-    config.color = input;
 
   readline.question(`Quel prefix voulez vous avoir ?\n`, (input) => {
     config.prefix = input;
-    modulee.start(config.token,config.name,config.color,config.owner,config.prefix);
+    modulee.start(config.token,config.name,config.owner,config.prefix);
     readline.close();
         })
       })
     })
   })
-})
 }
 init();

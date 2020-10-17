@@ -1,24 +1,18 @@
-exports.run = async (client, message, args, level) => {
+const { Discord, discord } = require('discord.js')
+
+module.exports.run = async (client, message, args, level) => {
+  if(!args[0]) return message.channel.send('Veuillez entrer une ligne javascript')
   const code = args.join(" ");
   try {
     const evaled = eval(code);
-    const clean = await client.clean(client, evaled);
-    message.channel.send(`\`\`\`js\n${clean}\n\`\`\``);
+    message.channel.send(`\`\`\`js\n${evaled}\n\`\`\``);
   } catch (err) {
-    message.channel.send(`\`ERREUR\` \`\`\`xl\n${await client.clean(client, err)}\n\`\`\``);
+    message.channel.send(`\`ERREUR\` \`\`\`xl\n${err}\n\`\`\``);
   }
 };
 
-exports.conf = {
-  enabled: true,
-  guildOnly: false,
-  aliases: [],
-  permLevel: "Bot Owner"
-};
-
-exports.help = {
+module.exports.help = {
   name: "eval",
-  category: "Système",
   description: "Permet de tester un code javascript.",
   usage: "eval [...code]"
 };

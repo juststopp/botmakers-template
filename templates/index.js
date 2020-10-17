@@ -1,40 +1,43 @@
-const Discord = require("discord.js");
-const { promisify } = require("util");
-const readdir = promisify(require("fs").readdir);
-const Enmap = require("enmap");
+const Discord = require('discord.js');
 const client = new Discord.Client();
-client.config = require("./config.js");
-require("./modules/functions.js")(client);
-client.commands = new Enmap();
-client.aliases = new Enmap();
-client.settings = new Enmap({
-  name: "settings",
-  fetchAll: true,
-  autoFetch: true,
-  cloneLevel: 'deep'
-});
-const init = async () => {
-  const cmdFiles = await readdir("./commands/");
-  console.log(`${cmdFiles.length} commandes ont été chargés.`);
-  cmdFiles.forEach(f => {
-    if (!f.endsWith(".js")) return;
-    const response = client.loadCommand(f);
-    if (response) console.log(response);
-  });
-  const evtFiles = await readdir("./events/");
-  console.log(`${evtFiles.length} events ont été chargés.`);
-  evtFiles.forEach(file => {
-    const eventName = file.split(".")[0];
-    console.log(`Chargement de l'évènement: ${eventName}`);
-    const event = require(`./events/${file}`);
-    client.on(eventName, event.bind(null, client));
-  });
-  client.levelCache = {};
-  for (let i = 0; i < client.config.permLevels.length; i++) {
-    const thisLevel = client.config.permLevels[i];
-    client.levelCache[thisLevel.name] = thisLevel.level;
-  }
-  client.login(client.config.token);
-};
+client.commands = new Discord.Collection();
+client.config = require('./config.js')
+const fs = require('fs');
 
-init();
+const { GiveawaysManager } = require("discord-giveaways");
+const manager = new GiveawaysManager(client, {
+    storage: "./giveaways.json",
+    updateCountdownEvery: 5000,
+    default: {
+        botsCanWin: false,
+        embedColor: "#2f3136",
+        reaction: "🎁"
+    }
+});
+
+client.giveawaysManager = manager;
+
+fs.readdir('./commands/', (error, f) => {
+    if (error) { return console.error(error); }
+        let commandes = f.filter(f => f.split('.').pop() === 'js');
+        if (commandes.length <= 0) { return console.log('Aucune commande trouvée !'); }
+
+        commandes.forEach((f) => {
+            let commande = require(`./commands/${f}`);
+            console.log(`${f} commande chargée !`);
+            client.commands.set(commande.help.name, commande);
+        });
+});
+
+fs.readdir('./events/', (error, f) => {
+    if (error) { return console.error(error); }
+        console.log(`${f.length} events chargés`);
+
+        f.forEach((f) => {
+            let events = require(`./events/${f}`);
+            let event = f.split('.')[0];
+            client.on(event, events.bind(null, client));
+        });
+});
+
+client.login(client.config.token)

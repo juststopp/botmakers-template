@@ -1,9 +1,8 @@
 const fs = require('file-system');
 const ncp = require('ncp');
-module.exports.start = async function start(token, name, color, owner, prefix, f) {
-    if(!token) throw new TypeError('Vous devez tout mettre le token du bot.');
+module.exports.start = async function start(token, name, owner, prefix, f) {
+    if(!token) throw new TypeError('Vous devez tout d\'abord mettre le token du bot.');
     if(!name) throw new TypeError('Veuillez entrer le nom du bot en deuxième paramètre.');
-    if(!color || !color.startsWith('#')) throw new TypeError('En troisième paramètre, nous demandons une couleur, qui doit être en Color HEX. Exemple: #FFFFFF pour le blanc.');
     if(!owner || !parseInt(owner)) throw new TypeError('Veuillez entrer vôtre identifiant.');
     if(!prefix) throw new TypeError('Pour finir, veuillez mettre le prefix du bot.');
 
@@ -29,7 +28,7 @@ let progress = 0;
       "version": "1.0.0",
       "description": "DiscordJSBot",
       "license": "MIT",
-      "repository": "MayorChano/discordjs-template",
+      "repository": "juststopp/botmakers-template",
       "main": "index.js",
       "scripts": {
         "start": "node index.js"
@@ -47,54 +46,9 @@ const config = {
         "admins": [],
         "support": [],
         "token": "${token}",
-        "colour": "0x${color.slice(1)}",
         "defaultSettings" : {
             "prefix": "${prefix}",
-            },
-            permLevels: [
-            {   level: 0,
-                name: "User", 
-                check: () => true
-            },
-            {   level: 2,
-                name: "Moderator",
-                check: (message) => {
-                  try {
-                    return (message.member.hasPermission("MANAGE_MESSAGES"));
-                  } catch (e) {
-                    return false;
-                  }
-                }
-            },
-          
-            {   level: 3,
-                name: "Administrator", 
-                check: (message) => {
-                  try {
-                    return (message.member.hasPermission("ADMINISTRATOR"));
-                  } catch (e) {
-                    return false;
-                  }
-                }
-            },
-            {    level: 4,
-                name: "Server Owner",
-                check: (message) => message.channel.type === "text" ? (message.guild.ownerID === message.author.id ? true : false) : false
-            },
-            {    level: 8,
-                name: "Bot Support",
-                check: (message) => config.support.includes(message.author.id)
-            },
-          
-            {   level: 9,
-                name: "Bot Admin",
-                check: (message) => config.admins.includes(message.author.id)
-            },
-            {   level: 10,
-                name: "Bot Owner", 
-                check: (message) => message.client.config.ownerID === message.author.id
-            }
-        ]
+        }
     };
 module.exports = config;`;
 if(f) {
@@ -149,7 +103,7 @@ await ncp(__dirname + '/templates/modules/', 'modules/', function (err) {
    bar.progress = progress;
    const exec = require("child_process").exec;
    console.log('Téléchargement des packages npm nécessaires.')
-   await exec(`npm i --save better-sqlite-pool chalk discord.js enmap express file-system moment moment-duration-format request`, async(error, stdout) => {
+   await exec(`npm i --save ms fs discord-giveaways discord.js moment-duration-format moment`, async(error, stdout) => {
        if(stdout) {
         progress = 1;
         label.content = ' - Terminé!'

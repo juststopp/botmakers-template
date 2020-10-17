@@ -21,7 +21,7 @@ Maintenant que le npm est installé et fonctionnel, nous allons pouvoir commence
 
 ```
 const template = require('botmakers-template')
-template.start(token, nom, couleur, votreId, préfixe)
+template.start(token, nom, votreId, préfixe)
 ```
 
 Dans ces deux lignes, vous devrez remplacer tous les paramètre. Ne vous inquiétez pas je vais vous aider.
@@ -30,7 +30,6 @@ __Tout d'abord__ :
 
 - ``token``・Vous devrez remplacer ça par le token de vôtre bot. Cliquez [ici](https://discord.com/developers/applications/me) et rendez vous sur vôtre bot. Ensuite, dans la section bot, il y aura marqué ``token``. Cliquez sur copier, et mettre le token entre guillemets, à la place de ``token``.
 - ``nom``・Toujours entre guillemets, vous devrez ici entrer un nom d'utilisateur pour vôtre bot.
-- ``couleur``・Ici, toujours entre guillemets, vous devrez mettre la couleur principale du bot, en Color HEX.
 - ``votreId``・Vous mettrez ici vôtre identifiant.
 - ``préfixe``・Ici, pour finir vous mettrez le préfixe que vous voulez que le bot ait.
 

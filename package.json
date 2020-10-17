@@ -1,8 +1,7 @@
 {
   "_from": "botmakers-template",
-  "_id": "botmakers-template@2.3.6",
   "_inBundle": false,
-  "_integrity": "sha512-BtMzzIdy8PK+MEBRtOcpM3Iba7HVuEuWvnCCyzT0cCQXgHs1zQ0sTnxBv9NTCcwjaFQypiTaRJuItrI04FNanQ==",
+  "_integrity": "sha512-2/JNYu3itty92Ir3w4uzeKH39wI7S3fv+TPM6dfjYfIu+9ovX0PcG1SYvT/GH77T2d+adOS+9sQ/c37I6+KNqw==",
   "_location": "/botmakers-template",
   "_phantomChildren": {},
   "_requested": {
@@ -19,35 +18,37 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/botmakers-template/-/botmakers-template-2.3.6.tgz",
-  "_shasum": "3892daaddb647a8fe7134d2d5c4967fcfc583dfa",
+  "_resolved": "https://registry.npmjs.org/botmakers-template/-/botmakers-template-1.1.1.tgz",
+  "_shasum": "28692cc8bd32b9ea16a3b3094ae74c5e349e02b9",
   "_spec": "botmakers-template",
-  "_where": "/home/malo/Documents/Gen",
+  "_where": "D:\\Backups\\Npm",
+  "author": "JustStop",
   "bugs": {
-    "url": "https://github.com/MayorChano/botmakers-template/issues"
+    "url": "https://github.com/juststopp/botmakers-template/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
+    "child_process": "^1.0.2",
     "file-system": "^2.2.2",
     "log-frame": "^1.0.5",
     "logf-progress": "^1.3.2",
     "ncp": "^2.0.0"
   },
   "deprecated": false,
-  "description": "A basic template of a discordjs bot",
-  "homepage": "https://github.com/juststopp/",
-  "keywords": [
-    "discordjs",
-    "bot",
-    "template",
-    "discord bot"
-  ],
-  "license": "MIT",
+  "description": "A discord.js template",
+  "devDependencies": {},
+  "homepage": "https://github.com/juststopp/botmakers-template#readme",
+  "license": "ISC",
   "main": "index.js",
   "name": "botmakers-template",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/juststopp/"
+    "url": "git+https://github.com/juststopp/botmakers-template.git"
   },
-  "version": "2.3.6"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.3",
+  "keywords": [
+    "$"
+  ]
 }
